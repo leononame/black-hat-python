@@ -22,7 +22,7 @@ def handle_client(client_socket):
 
     print "[*] Received: " + req
 
-    client_socket.send("it works")
+    client_socket.send("it works\n")
     client_socket.close()
 
 
