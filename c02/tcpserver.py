@@ -12,19 +12,10 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind((bind_ip, bind_port))
 server.listen(5)
 
-
-# # Handler for SIGINT
-# def handle_sigint(signal, frame):
-#     # Close socket
-#     server.close()
-#     sys.exit(0)
-#
-#
-# signal.signal(signal.SIGINT, handle_sigint)
-
 print "[*] Listening on " + bind_ip + ":" + str(bind_port)
 
 
+# Handle client request
 def handle_client(client_socket):
     # Get client data
     req = client_socket.recv(1024)
@@ -43,6 +34,7 @@ while True:
 
         client_handler = threading.Thread(target=handle_client, args=(client,))
         client_handler.start()
+
     except KeyboardInterrupt:
         client.close()
         break
